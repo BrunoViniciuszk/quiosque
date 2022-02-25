@@ -15,7 +15,7 @@ public class IndexController {
 	@RequestMapping("index")
 	public String index() {
 		System.out.println("Passou aqui"+ConnectionFactory.conectar());
-		return "index";
+		return "Index";
 	}
 	
 	@RequestMapping("listarEstatisticas")
