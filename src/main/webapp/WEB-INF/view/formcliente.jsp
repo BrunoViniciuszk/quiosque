@@ -114,8 +114,6 @@ button:hover {
 								<input name="dataNascimento" placeholder="Insira sua data de nascimento"
 									required="required" type="date" class="wid500"  value="<fmt:formatDate pattern="yyyy-MM-dd" value="${cliente.dataNascimento.time}"/>">
 							</div>
-							
-							
 						</div>
 
 					</div>

@@ -28,29 +28,27 @@ public class IndexController {
 		for (Cliente cliente : dao.listar()) {
 		
 		// contador dia da semana
-			cliente.getDataCadastro();
-			switch(Calendar.DAY_OF_WEEK) {
+			switch(cliente.getDataCadastro().get(Calendar.DAY_OF_WEEK)) {
 	            case Calendar.SUNDAY:
-	            	dom += 1;
+	            	dom++;
 	                break;
 	            case Calendar.MONDAY:
-	            	seg += 1;
+	            	seg++;
 	            	break;
 	            case Calendar.TUESDAY:
-	            	ter += 1;
+	            	ter++;
 	            	break;
 	            case Calendar.WEDNESDAY:
-	            	qua += 1;
+	            	qua++;
 	            	break;
 	            case Calendar.THURSDAY:
-	            	qui += 1;
+	            	qui++;
 	            	break;
 	            case Calendar.FRIDAY:
-	            	sex += 1;
+	            	sex++;
 	            	break;
 	            case Calendar.SATURDAY:
-	            	
-	            	sab += 1;
+	            	sab++;
 	            	break;
 	            default:
 	                
@@ -60,8 +58,8 @@ public class IndexController {
 			
 			// contador periodo
 			
-			cliente.getDataCadastro();
-			int hora = Calendar.HOUR_OF_DAY;
+			
+			int hora = cliente.getDataCadastro().get(Calendar.HOUR_OF_DAY);
 			
 			if(hora < 12) {
 				manha++;

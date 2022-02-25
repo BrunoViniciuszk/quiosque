@@ -27,6 +27,7 @@ public class ClienteController {
 		System.out.println(cliente.getEndereco());
 		System.out.println(cliente.getTelefone());
 		System.out.println(cliente.getDataNascimento());
+		System.out.println(cliente.getDataCadastro());
 
 		DaoCliente dao = new DaoCliente();
 		if(cliente.getId() == null) {

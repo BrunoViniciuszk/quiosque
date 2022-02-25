@@ -50,6 +50,7 @@ a {
 			<th>Endereco</th>
 			<th>Email</th>
 			<th>Telefone</th>
+			<th>Data de Cadastro</th>
 			<th>Data de Nascimento</th>
 			<th>Excluir</th>
 			<th>Alterar</th>
@@ -61,6 +62,7 @@ a {
 				<td>${c.endereco}</td>
 				<td>${c.email}</td>
 				<td>${c.telefone}</td>
+				<td><fmt:formatDate pattern="dd/MM/yyyy HH:mm:ss" value="${c.dataCadastro.time}"/></td>
 				<td><fmt:formatDate pattern="dd/MM/yyyy" value="${c.dataNascimento.time}"/></td>
 				<td><a href="excluirCliente?idCliente=${c.id}">Excluir</a></td>
 				<td><a href="alterarCliente?idCliente=${c.id}">Alterar</a></td>

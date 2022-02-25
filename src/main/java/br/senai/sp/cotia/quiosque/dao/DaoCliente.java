@@ -9,10 +9,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import br.senai.sp.cotia.quiosque.controller.IndexController;
 import br.senai.sp.cotia.quiosque.model.Cliente;
-import br.senai.sp.cotia.quiosque.model.ProdutoInteresse;
+
 
 
 public class DaoCliente {
@@ -35,9 +33,9 @@ private Connection conexao;
 			stmt.setString(4, cliente.getEmail());
 			stmt.setDate(5, new Date(cliente.getDataNascimento().getTimeInMillis()));
 			stmt.setString(6, cliente.getGenero());
-			stmt.setTimestamp(7, new java.sql.Timestamp(cliente.getDataCadastro().getTimeInMillis()));
 			Calendar agora = Calendar.getInstance();
 			cliente.setDataCadastro(agora);
+			stmt.setTimestamp(7, new Timestamp(cliente.getDataCadastro().getTimeInMillis()));
 			stmt.execute();
 			stmt.close();
 			conexao.close();
@@ -48,7 +46,7 @@ private Connection conexao;
 	
 	
 	public void atualizar(Cliente cliente) {
-		String sql = "update tb_cliente set nome = ?, endereco = ?, telefone = ?, email = ?, data_nascimento = ?, genero = ?, data_cadastro = ? where id = ?";
+		String sql = "update tb_cliente set nome = ?, endereco = ?, telefone = ?, email = ?, data_nascimento = ?, genero = ? where id = ?";
 		PreparedStatement stmt;
 		try {
 			stmt = conexao.prepareStatement(sql);
@@ -58,8 +56,7 @@ private Connection conexao;
 			stmt.setString(4, cliente.getEmail());
 			stmt.setDate(5, new Date(cliente.getDataNascimento().getTimeInMillis()));
 			stmt.setString(6, cliente.getGenero());
-			stmt.setTimestamp(7, new java.sql.Timestamp(cliente.getDataCadastro().getTimeInMillis()));
-			stmt.setLong(8, cliente.getId());
+			stmt.setLong(7, cliente.getId());
 			stmt.execute();
 			stmt.close();
 			conexao.close();
@@ -93,18 +90,15 @@ private Connection conexao;
 				// "setar" a validade no produto
 				c.setDataNascimento(nascimento);
 				
-				
-				// cria um Calendar
-				Calendar cadastro = Calendar.getInstance();
-				// extrair o Date do resultset
-				Timestamp datadb = rs.getTimestamp("data_cadastro");
-				// "setar" a data do calendar pela data do date
-				cadastro.setTimeInMillis(datadb.getTime());
-				// "setar" o nascimento do cliente
-				c.setDataCadastro(cadastro);
-				
-				
 				c.setGenero(rs.getString("genero"));
+				
+				Calendar cad = Calendar.getInstance();
+				Timestamp dataCadastro = rs.getTimestamp("data_cadastro");
+				cad.setTimeInMillis(dataCadastro.getTime());
+				c.setDataCadastro(cad);
+				
+				
+				
 				lista.add(c);
 				
 				
@@ -142,16 +136,11 @@ private Connection conexao;
 				nascimento.setTimeInMillis(dataBd.getTime());
 				// "setar" o nascimento do cliente
 				c.setDataNascimento(nascimento);
-				c.setGenero(rs.getString("genero"));
 				
-				// cria um Calendar
-				Calendar cadastro = Calendar.getInstance();
-				// extrair o Date do resultset
-				Date datadb = rs.getDate("data_cadastro");
-				// "setar" a data do calendar pela data do date
-				cadastro.setTimeInMillis(datadb.getTime());
-				// "setar" o nascimento do cliente
-				c.setDataCadastro(cadastro);
+				Calendar cad = Calendar.getInstance();
+				Timestamp dataCadastro = rs.getTimestamp("data_cadastro");
+				cad.setTimeInMillis(dataCadastro.getTime());
+				c.setDataCadastro(cad);
 				c.setGenero(rs.getString("genero"));
 				
 			
